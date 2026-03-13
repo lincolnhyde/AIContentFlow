@@ -22,6 +22,7 @@
   background-color: #282c34;
   border-radius: 8px;
   margin-bottom: 2rem;
+  flex-wrap: wrap; /* Allow navbar items to wrap on smaller screens */
 }
 
 .navbar a {
@@ -31,6 +32,7 @@
   font-weight: bold;
   font-size: 1.1rem;
   transition: color 0.3s ease;
+  padding: 5px 0; /* Add vertical padding for touch targets */
 }
 
 .navbar a:hover {
@@ -90,6 +92,7 @@
   font-size: 1rem;
   margin-top: 1rem;
   transition: background-color 0.3s ease;
+  width: auto; /* Ensure buttons don't stretch full width by default */
 }
 
 .auth-container button:hover,
@@ -116,4 +119,42 @@
   margin-top: 1.5rem;
   white-space: pre-wrap;
   word-wrap: break-word;
+}
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 768px) {
+  #root {
+    padding: 1rem; /* Reduce overall padding on smaller screens */
+  }
+
+  .navbar {
+    flex-direction: column; /* Stack navbar links vertically */
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .navbar a {
+    margin: 5px 0; /* Adjust vertical margin for stacked links */
+    width: 100%; /* Make links take full width for easier tapping */
+    text-align: center;
+  }
+
+  .home-container,
+  .auth-container,
+  .dashboard-container {
+    padding: 1.5rem; /* Reduce padding inside containers */
+    margin: 0.5rem auto; /* Adjust margin for smaller screens */
+    max-width: 95%; /* Allow containers to take up more width */
+  }
+
+  .auth-container button,
+  .dashboard-container button {
+    width: 100%; /* Make buttons full width for better touch targets */
+    margin-left: 0;
+    margin-bottom: 10px; /* Add space between stacked buttons */
+  }
+
+  .dashboard-container button + button {
+    margin-left: 0; /* Remove left margin for stacked buttons */
+  }
 }
