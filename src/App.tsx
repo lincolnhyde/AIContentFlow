@@ -43,9 +43,11 @@ const Auth = () => {
           placeholder="••••••••"
         />
       </div>
-      <button onClick={handleLogin}>Login</button>
-      <button onClick={handleSignUp} style={{ marginLeft: '10px' }}>Sign Up</button>
-      <p>Already have an account? <Link to="/auth">Login</Link></p>
+      <div className="button-group">
+        <button onClick={handleLogin}>Login</button>
+        <button onClick={handleSignUp}>Sign Up</button>
+      </div>
+      <p>Don't have an account? <Link to="/register">Register</Link></p>
     </div>
   );
 };
@@ -53,9 +55,29 @@ const Auth = () => {
 // Placeholder for the actual Dashboard component
 const Dashboard = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Simulate login state
+  const [niche, setNiche] = useState('');
+  const [location, setLocation] = useState('');
+  const [contentType, setContentType] = useState('social-post');
+  const [keywords, setKeywords] = useState('');
+  const [generatedContent, setGeneratedContent] = useState('Generated content will appear here.');
 
   const handleLoginToggle = () => {
     setIsLoggedIn(!isLoggedIn);
+  };
+
+  const handleGenerateContent = () => {
+    console.log('Simulated Content Generation:', { niche, location, contentType, keywords });
+    setGeneratedContent(`Simulated content for a ${niche} in ${location} about ${keywords} (${contentType}).\n\nThis is a placeholder for actual AI-generated output.`);
+  };
+
+  const handleSaveDraft = () => {
+    console.log('Simulated Save Draft:', { generatedContent });
+    alert('Draft Saved (simulated)!');
+  };
+
+  const handleCopyToClipboard = () => {
+    navigator.clipboard.writeText(generatedContent);
+    alert('Content copied to clipboard (simulated)!');
   };
 
   return (
@@ -69,17 +91,58 @@ const Dashboard = () => {
           <p>Welcome back! You are logged in.</p>
           <div className="content-generator-section">
             <h3>Generate New Content</h3>
-            <p>Niche & Location Selector will go here.</p>
-            <p>Content Type Selector will go here.</p>
-            <p>Keywords/Topic Input will go here.</p>
-            <button>Generate Content (Placeholder)</button>
+            <div className="form-group">
+              <label htmlFor="niche">Business Niche:</label>
+              <input
+                type="text"
+                id="niche"
+                value={niche}
+                onChange={(e) => setNiche(e.target.value)}
+                placeholder="e.g., Local Plumber, Artisan Coffee Shop"
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="location">Location:</label>
+              <input
+                type="text"
+                id="location"
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
+                placeholder="e.g., Sydney, NSW"
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="contentType">Content Type:</label>
+              <select
+                id="contentType"
+                value={contentType}
+                onChange={(e) => setContentType(e.target.value)}
+              >
+                <option value="social-post">Short Social Media Post</option>
+                <option value="blog-idea">Brief Blog Post Idea/Outline</option>
+                <option value="gmb-update">Google My Business Update</option>
+              </select>
+            </div>
+            <div className="form-group">
+              <label htmlFor="keywords">Keywords/Topic:</label>
+              <input
+                type="text"
+                id="keywords"
+                value={keywords}
+                onChange={(e) => setKeywords(e.target.value)}
+                placeholder="e.g., blocked drains, emergency, reliable"
+              />
+            </div>
+            <button onClick={handleGenerateContent}>Generate Content</button>
             <div className="output-area">
-              <p>Generated content will appear here.</p>
-              <button>Save Draft</button>
-              <button>Copy to Clipboard</button>
+              <p>{generatedContent}</p>
+              <div className="button-group">
+                <button onClick={handleSaveDraft}>Save Draft</button>
+                <button onClick={handleCopyToClipboard}>Copy to Clipboard</button>
+              </div>
             </div>
           </div>
-          <p>You have [X] free generations remaining.</p>
+          <p className="credits-info">You have [X] free generations remaining.</p>
         </div>
       ) : (
         <p>Please <Link to="/auth">log in</Link> to access the content generator.</p>

@@ -100,7 +100,7 @@
   background-color: #0056b3;
 }
 
-.dashboard-container button + button {
+.dashboard-container .button-group button + button {
   margin-left: 10px;
 }
 
@@ -116,12 +116,15 @@
 }
 
 .form-group input[type="email"],
-.form-group input[type="password"] {
+.form-group input[type="password"],
+.form-group input[type="text"],
+.form-group select {
   width: calc(100% - 20px); /* Account for padding */
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 5px;
   font-size: 1rem;
+  box-sizing: border-box; /* Include padding in width */
 }
 
 .content-generator-section {
@@ -135,10 +138,41 @@
   border: 1px solid #ddd;
   border-radius: 5px;
   padding: 1rem;
-  min-height: 100px;
+  min-height: 150px; /* Increased min-height for better visibility */
   margin-top: 1.5rem;
   white-space: pre-wrap;
   word-wrap: break-word;
+  text-align: left;
+}
+
+.output-area p {
+  margin-bottom: 1rem; /* Space for the generated text */
+}
+
+.output-area .button-group {
+  margin-top: 1rem;
+  text-align: right; /* Align buttons to the right */
+}
+
+.output-area .button-group button {
+  margin-left: 10px;
+}
+
+.credits-info {
+  text-align: center;
+  margin-top: 2rem;
+  font-style: italic;
+  color: #777;
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem; /* Space above button groups */
+}
+
+.button-group button {
+  margin: 0 5px; /* Space between buttons in a group */
 }
 
 /* --- Mobile Responsiveness --- */
@@ -174,12 +208,18 @@
     margin-bottom: 10px; /* Add space between stacked buttons */
   }
 
-  .dashboard-container button + button {
-    margin-left: 0; /* Remove left margin for stacked buttons */
+  .dashboard-container .button-group {
+    flex-direction: column; /* Stack buttons in dashboard button groups */
+  }
+
+  .dashboard-container .button-group button {
+    margin: 0 0 10px 0; /* Adjust margins for stacked buttons */
   }
 
   .form-group input[type="email"],
-  .form-group input[type="password"] {
-    width: 100%; /* Ensure inputs are full width on mobile */
+  .form-group input[type="password"],
+  .form-group input[type="text"],
+  .form-group select {
+    width: 100%; /* Ensure inputs/selects are full width on mobile */
   }
 }
