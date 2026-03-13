@@ -4,14 +4,51 @@ import './App.css';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
 // Placeholder for the actual Auth component
-const Auth = () => (
-  <div className="auth-container">
-    <h2>Login / Sign Up</h2>
-    <p>Authentication UI will go here (email, password, magic link).</p>
-    <button onClick={() => alert('Simulated Login/Signup')}>Simulate Auth</button>
-    <p>Don't have an account? <Link to="/register">Register</Link></p>
-  </div>
-);
+const Auth = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleLogin = () => {
+    console.log('Simulated Login:', { email, password });
+    alert(`Simulated Login for ${email}`);
+    // In a real app, you'd call supabase.auth.signInWithPassword
+  };
+
+  const handleSignUp = () => {
+    console.log('Simulated Sign Up:', { email, password });
+    alert(`Simulated Sign Up for ${email}`);
+    // In a real app, you'd call supabase.auth.signUp
+  };
+
+  return (
+    <div className="auth-container">
+      <h2>Login / Sign Up</h2>
+      <div className="form-group">
+        <label htmlFor="email">Email:</label>
+        <input
+          type="email"
+          id="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="your.email@example.com"
+        />
+      </div>
+      <div className="form-group">
+        <label htmlFor="password">Password:</label>
+        <input
+          type="password"
+          id="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="••••••••"
+        />
+      </div>
+      <button onClick={handleLogin}>Login</button>
+      <button onClick={handleSignUp} style={{ marginLeft: '10px' }}>Sign Up</button>
+      <p>Already have an account? <Link to="/auth">Login</Link></p>
+    </div>
+  );
+};
 
 // Placeholder for the actual Dashboard component
 const Dashboard = () => {

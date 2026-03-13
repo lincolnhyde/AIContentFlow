@@ -104,6 +104,26 @@
   margin-left: 10px;
 }
 
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  color: #555;
+}
+
+.form-group input[type="email"],
+.form-group input[type="password"] {
+  width: calc(100% - 20px); /* Account for padding */
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
 .content-generator-section {
   border-top: 1px solid #eee;
   padding-top: 2rem;
@@ -156,5 +176,10 @@
 
   .dashboard-container button + button {
     margin-left: 0; /* Remove left margin for stacked buttons */
+  }
+
+  .form-group input[type="email"],
+  .form-group input[type="password"] {
+    width: 100%; /* Ensure inputs are full width on mobile */
   }
 }
